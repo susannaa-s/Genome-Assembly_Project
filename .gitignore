@@ -1,3 +1,13 @@
+fastp_results/
+fastqc_results/
+flye_output/
+hifiasm_output/
+jellyfish_results/
+lja_output/
+trinity_output/
+Out&Err/
+
+
 # Large data files
 *.fastq
 *.fastq.gz
