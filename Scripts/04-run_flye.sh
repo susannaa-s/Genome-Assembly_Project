@@ -12,10 +12,10 @@ CONTAINER="/containers/apptainer/flye_2.9.5.sif"
 INPUT_DIR="/data/users/sschaerer/assembly_annotation_course/Mr-0"
 OUTPUT_DIR="/data/users/sschaerer/assembly_annotation_course/flye_output"
 
-# Number of threads
+# Number of threads equals to cpus per task
 THREADS=16
 
-# Create output directory
+# Creating the output directory
 mkdir -p "$OUTPUT_DIR"
 
 # Expand FASTQ files and convert to container path

@@ -8,12 +8,13 @@
 #SBATCH --time=01:00:00
 #SBATCH --mem=32G
 
-# Paths
+# Paths to container and directories
 CONTAINER="/containers/apptainer/fastp_0.23.2--h5f740d0_3.sif"
-INPUT_DIR=$(readlink -f "$1")    # Resolve symlink
+# Resolve symlink to get absolute path
+INPUT_DIR=$(readlink -f "$1")    
 OUTPUT_DIR="$2"
 
-# Make output directory
+# Make output directory (if it doen't exist yet)
 mkdir -p "$OUTPUT_DIR"
 
 # Run Fastp on each fastq.gz file

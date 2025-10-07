@@ -8,15 +8,16 @@
 #SBATCH --time=01:00:00
 #SBATCH --mem=8G
 
-# Paths
+# Paths to container and directories
 FASTQC_CONTAINER="/containers/apptainer/fastqc-0.12.1.sif"
-INPUT_DIR=$(readlink -f "$1")    # Resolve symlink
+# Resolve symlink to get absolute path
+INPUT_DIR=$(readlink -f "$1")    
 OUTPUT_DIR="$2"
 
 # Make sure output directory exists
 mkdir -p "$OUTPUT_DIR"
 
-# Run FastQC on each file
+# Run FastQC on each file by looping through all .fastq.gz files in the input directory
 for file in "$INPUT_DIR"/*.fastq.gz; do
     echo "Running FastQC on $file"
     apptainer exec \

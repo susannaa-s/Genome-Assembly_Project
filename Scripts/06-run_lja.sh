@@ -13,10 +13,10 @@ INPUT_DIR="/data/users/sschaerer/assembly_annotation_course/Mr-0"
 OUTPUT_DIR="/data/users/sschaerer/assembly_annotation_course/lja_output"
 THREADS=16
 
-# Create output directory
+# Creating the output directory
 mkdir -p "$OUTPUT_DIR"
 
-# Build the list of --reads arguments using container paths
+# Building the list of --reads arguments using container paths
 READS=""
 for f in "$INPUT_DIR"/*.fastq.gz; do
     base=$(basename "$f")
@@ -28,7 +28,7 @@ for f in "$INPUT_DIR"/*.fastq.gz; do
     echo "/data/input/$(basename "$f")"
 done
 
-# Run LJA inside the container
+# Run LJA inside the container 
 apptainer exec \
     --bind "$INPUT_DIR":/data/input \
     --bind "$OUTPUT_DIR":/data/output \
