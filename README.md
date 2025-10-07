@@ -306,19 +306,19 @@ Located in /data/users/sschaerer/assembly_annotation_course/merqury_results/
 - merqury_summary.tsv — combined summary table of QV and completeness.
 
 Command:
-# Step 1: Build meryl database
+Step 1: Build meryl database
 ```
 sbatch 11_1_build_meryl_db.sh
 
 ```
 
-# Step 2: Run Merqury evaluation
+Step 2: Run Merqury evaluation
 
 ```
 sbatch 11_2_run_merqury.sh
 ```
 
-# Step 3: Create final summary table 
+Step 3: Create final summary table 
 
 ```
 echo -e "Assembly\tQV\tCompleteness(%)" > merqury_summary.tsv
