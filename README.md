@@ -10,7 +10,7 @@ To perform quality control on raw sequencing reads to assess overall quality, GC
 - Whole-genome PacBio HiFi reads of Arabidopsis thaliana accession MR-0
 - Whole-transcriptome Illumina RNA-seq reads of accession Sha
 
-````
+```
 sbatch run_fastqc.sh /data/users/sschaerer/assembly_annotation_course/MR-0 \
                      /data/users/sschaerer/assembly_annotation_course/fastqc_results
 ```
