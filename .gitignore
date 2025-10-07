@@ -1,3 +1,4 @@
+# Ignore directories for results and outputs
 fastp_results/
 fastqc_results/
 flye_output/
@@ -5,10 +6,11 @@ hifiasm_output/
 jellyfish_results/
 lja_output/
 trinity_output/
+trinity_output_FastP/
 Out&Err/
 MR-0/
 RNAseq_Sha/
-
+merqury_results/
 
 # Large data files
 *.fastq
@@ -45,3 +47,17 @@ RNAseq_Sha/
 *.swo
 *.DS_Store
 __pycache__/
+
+# BUSCO outputs
+busco_downloads/
+busco_*_output/
+
+# QUAST outputs
+quast_no_ref_output/
+quast_with_ref_output/
+
+# Merqury / Meryl outputs
+*.meryl
+
+# Keep scripts tracked
+!*.sh
