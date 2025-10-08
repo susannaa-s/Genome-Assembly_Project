@@ -11,6 +11,11 @@ Out&Err/
 MR-0/
 RNAseq_Sha/
 merqury_results/
+mummer_output/
+busco_plots/
+
+Mr-0
+RNAseq_Sha
 
 # Large data files
 *.fastq
