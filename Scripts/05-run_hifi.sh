@@ -4,8 +4,8 @@
 #SBATCH --time=1-00:00:00
 #SBATCH --mem=64G
 #SBATCH --cpus-per-task=16
-#SBATCH --output=hifi_%j.out
-#SBATCH --error=hifi_%j.err
+#SBATCH --output=./Out&Err/hifi_%j.out
+#SBATCH --error=./Out&Err/hifi_%j.err
 
 # Paths to container and directories
 CONTAINER="/containers/apptainer/hifiasm_0.25.0.sif"
