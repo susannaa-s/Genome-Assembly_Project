@@ -4,8 +4,8 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
 #SBATCH --time=2-00:00:00
-#SBATCH --output=trinity_%j.out
-#SBATCH --error=trinity_%j.err
+#SBATCH --output=./Out&Err/trinity_%j.out
+#SBATCH --error=./Out&Err/trinity_%j.err
 
 # Load Trinity module (if using module system)
 # The container could not be used in this case, otherwise the preferred method 
@@ -19,7 +19,7 @@ OUTPUT_DIR="/data/users/sschaerer/assembly_annotation_course/trinity_output_Fast
 
 mkdir -p "$OUTPUT_DIR"
 
-# Run Trinity 
+# Run Trinity on the paired-end reads
 Trinity \
   --seqType fq \
   --max_memory 60G \

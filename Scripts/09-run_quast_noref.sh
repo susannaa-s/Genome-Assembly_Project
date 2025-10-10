@@ -7,24 +7,22 @@
 #SBATCH --output=quast_no_ref_%j.out
 #SBATCH --error=quast_no_ref_%j.err
 
-# Load Apptainer container
+# path to container and assemblies
 QUAST_CONTAINER=/containers/apptainer/quast_5.2.0.sif
-
-# Paths to assemblies
 ASSEMBLIES=(
   /data/users/sschaerer/assembly_annotation_course/flye_output/assembly.fasta
   /data/users/sschaerer/assembly_annotation_course/hifiasm_output/hifiasm_p_ctg.fasta
   /data/users/sschaerer/assembly_annotation_course/lja_output/assembly.fasta
 )
 
-# Labels for assemblies
+# the labels for the assemblies in the same order as above
 LABELS="flye,hifiasm,lja"
 
-# Output directory
+# Make sure output directory exists, create It if it doesn't
 OUTPUT_DIR=/data/users/sschaerer/assembly_annotation_course/quast_no_ref_output
 mkdir -p "$OUTPUT_DIR"
 
-# Run QUAST
+# running quast without reference
 apptainer exec $QUAST_CONTAINER quast.py \
   --eukaryote \
   --threads 16 \

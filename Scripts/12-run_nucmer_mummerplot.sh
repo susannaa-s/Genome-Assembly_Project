@@ -7,7 +7,7 @@
 #SBATCH --output=Out&Err/nucmer_mummerplot_%j.out
 #SBATCH --error=Out&Err/nucmer_mummerplot_%j.err
 
-# --- Variables ---
+# path to project directory, reference genome, assemblies to compare, output directory and apptainer image
 PROJECT_DIR="/data/users/${USER}/assembly_annotation_course"
 REF="${PROJECT_DIR}/references/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa"
 ASSEMBLIES=(
@@ -19,9 +19,10 @@ NAMES=("flye" "hifiasm" "lja")
 OUTDIR="${PROJECT_DIR}/mummer_output"
 CONTAINER="/containers/apptainer/mummer4_gnuplot.sif"
 
+# Make sure output directory exists, create It if it doesn't
 mkdir -p "${OUTDIR}"
 
-# --- Loop through assemblies ---
+# looping through assemblies to compare against reference
 for i in "${!ASSEMBLIES[@]}"; do
     ASM="${ASSEMBLIES[$i]}"
     NAME="${NAMES[$i]}"
@@ -51,7 +52,7 @@ for i in "${!ASSEMBLIES[@]}"; do
         "${PREFIX}_filtered.delta"
 done
 
-# --- Compare assemblies against each other ---
+# looping through assemblies to compare them against each other
 for ((i=0; i<${#ASSEMBLIES[@]}; i++)); do
     for ((j=i+1; j<${#ASSEMBLIES[@]}; j++)); do
         ASM1="${ASSEMBLIES[$i]}"
@@ -82,4 +83,3 @@ for ((i=0; i<${#ASSEMBLIES[@]}; i++)); do
     done
 done
 
-echo "All comparisons and plots completed."

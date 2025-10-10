@@ -7,31 +7,30 @@
 #SBATCH --output=busco_trinity_%j.out
 #SBATCH --error=busco_trinity_%j.err
 
-# Load available BUSCO module
+# Load available BUSCO module, the container could not be used in this case, otherwise the preferred method
 module load BUSCO/5.4.2-foss-2021a
 
-# -------- Choose which assembly to assess ----------
+# defining the optiones for different assemblies
 ASSEMBLY_TYPE="trinity"   # options: flye | hifiasm | lja | trinity
-# ---------------------------------------------------
 
-# Assign proper path to the selected assembly
+# Assign proper path to the selected assemblies depending on the assembly type
 declare -A ASSEMBLIES
 ASSEMBLIES["flye"]="/data/users/sschaerer/assembly_annotation_course/flye_output/assembly.fasta"
 ASSEMBLIES["hifiasm"]="/data/users/sschaerer/assembly_annotation_course/hifiasm_output/hifiasm_p_ctg.fasta"
 ASSEMBLIES["lja"]="/data/users/sschaerer/assembly_annotation_course/lja_output/assembly.fasta"
 ASSEMBLIES["trinity"]="/data/users/sschaerer/assembly_annotation_course/trinity_output/trinity_output.Trinity.fasta"
 
-
+# Input assembly based on the selected assembly type
 INPUT_ASSEMBLY=${ASSEMBLIES[$ASSEMBLY_TYPE]}
 
-# Select mode automatically
+# Selecting the mode automatically
 if [ "$ASSEMBLY_TYPE" = "trinity" ]; then
   MODE="transcriptome"
 else
   MODE="genome"
 fi
 
-# Output directory
+# Output directory  for BUSCO results based on the assembly type
 OUTPUT_DIR="/data/users/sschaerer/assembly_annotation_course/busco_${ASSEMBLY_TYPE}_output"
 mkdir -p "$OUTPUT_DIR"
 

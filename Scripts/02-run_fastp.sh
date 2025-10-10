@@ -14,13 +14,15 @@ CONTAINER="/containers/apptainer/fastp_0.23.2--h5f740d0_3.sif"
 INPUT_DIR=$(readlink -f "$1")    
 OUTPUT_DIR="$2"
 
-# Make output directory (if it doen't exist yet)
+# Make sure output directory exists, create It if it doesn't
 mkdir -p "$OUTPUT_DIR"
 
 # Run Fastp on each fastq.gz file
 for file in "$INPUT_DIR"/*.fastq.gz; do
     base=$(basename "$file" .fastq.gz)
+    # to keep track of progress
     echo "Running Fastp on $file"
+    # mounting input and output directories to /data/input and /data/output in the container
     apptainer exec \
         --bind "$INPUT_DIR":/data/input \
         --bind "$OUTPUT_DIR":/data/output \

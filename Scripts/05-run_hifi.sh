@@ -15,16 +15,17 @@ OUTPUT_DIR="/data/users/sschaerer/assembly_annotation_course/hifiasm_output"
 # Threads equals to cpus per task
 THREADS=16
 
-# Create output directory if it doesn't exist
+# Make sure output directory exists, create It if it doesn't
 mkdir -p "$OUTPUT_DIR"
 
 # Expand FASTQ files and convert to container path
 READS=$(ls "$INPUT_DIR"/*.fastq.gz | sed "s|$INPUT_DIR|/data/input|g")
 
+# to keep track of progress
 echo "Using reads:"
 echo "$READS"
 
-# Run hifiasm on the reads
+# Run hifiasm on the reads provided
 apptainer exec \
     --bind "$INPUT_DIR":/data/input \
     --bind "$OUTPUT_DIR":/data/output \
