@@ -4,8 +4,8 @@
 #SBATCH --time=2-00:00:00
 #SBATCH --mem=64G
 #SBATCH --cpus-per-task=16
-#SBATCH --output=lja_%j.out
-#SBATCH --error=lja_%j.err
+#SBATCH --output=./Out&Err/lja_%j.out
+#SBATCH --error=./Out&Err/lja_%j.err
 
 # Paths to container and directories
 CONTAINER="/containers/apptainer/lja-0.2.sif"
