@@ -4,8 +4,8 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 #SBATCH --time=1-00:00:00
-#SBATCH --output=Out&Err/nucmer_mummerplot_%j.out
-#SBATCH --error=Out&Err/nucmer_mummerplot_%j.err
+#SBATCH --output=./Out&Err/nucmer_mummerplot_%j.out
+#SBATCH --error=./Out&Err/nucmer_mummerplot_%j.err
 
 # path to project directory, reference genome, assemblies to compare, output directory and apptainer image
 PROJECT_DIR="/data/users/${USER}/assembly_annotation_course"
