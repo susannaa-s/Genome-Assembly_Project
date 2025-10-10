@@ -1,8 +1,6 @@
 # Genome-Assembly_Project
 
-
-All commands require to be launched from the projects directory "/data/users/sschaerer/assembly_annotation_course" to work correctly. 
-
+Note : All commands require to be launched from the projects directory "/data/users/sschaerer/assembly_annotation_course" to work correctly. 
 
 ## Part 1 - Read Quality control - FastQC 
 
@@ -17,7 +15,7 @@ sbatch Scripts/run_fastqc.sh /data/users/sschaerer/assembly_annotation_course/MR
 
 ## Part 2 - Trimming - FastP 
 
-Use fastp v0.23.2 to remove low-quality reads and adapter contamination from the Illumina RNA-seq data and to collect read statistics for the PacBio HiFi dataset (without filtering).
+Goal : Use fastp v0.23.2 to remove low-quality reads and adapter contamination from the Illumina RNA-seq data and to collect read statistics for the PacBio HiFi dataset (without filtering).
 
 Command : 
 
@@ -30,7 +28,7 @@ sbatch Scripts/run_fastp.sh /data/users/sschaerer/assembly_annotation_course/RNA
 
 ## Part 3 - Perform k-mer counting
 
-Perform k-mer counting on the PacBio HiFi genomic reads of to estimate genome size, heterozygosity, repeat content, and sequencing coverage using GenomeScope 2.0.
+Goal : Perform k-mer counting on the PacBio HiFi genomic reads of to estimate genome size, heterozygosity, repeat content, and sequencing coverage using GenomeScope 2.0.
 
 Purpose:
 - Count all 21-base-long subsequences (k-mers) in the raw genomic reads.
@@ -58,11 +56,10 @@ sbatch Scripts/run_jellyfish.sh /data/users/sschaerer/assembly_annotation_course
 
 ## Part 4 - Whole genome assembly using Flye
 
-Assembling the Genome from PacBio HiFi reads using Flye v2.9.5, a long-read assembler based on the Overlap–Layout–Consensus (OLC) approach.
+Goal : To assemble the Genome from PacBio HiFi reads using Flye v2.9.5, a long-read assembler based on the Overlap–Layout–Consensus (OLC) approach.
 
 Purpose:
 - Generate a high-quality de novo genome assembly for MR-0.
-- Evaluate contiguity and completeness compared to Hifiasm and LJA assemblies.
 
 Tool:
 Flye v2.9.5 executed via Apptainer container /containers/apptainer/flye_2.9.5.sif.
@@ -87,11 +84,10 @@ sbatch Scripts/run_flye.sh /data/users/sschaerer/assembly_annotation_course/MR-0
 
 ## Part 5 - Whole genome assembly using Hifiasm
 
-Assembling the Arabidopsis thaliana MR-0 genome from PacBio HiFi reads using Hifiasm v0.25.0. 
+Goal : To Assemble the MR-0 genome from PacBio HiFi reads using Hifiasm v0.25.0. 
 
 Purpose:
 - Generate a high-quality, haplotype-aware assembly of MR-0.
-- Compare assembly contiguity and accuracy with Flye and LJA results.
 
 Tool:
 Hifiasm v0.25.0 executed via Apptainer container /containers/apptainer/hifiasm_0.25.0.sif.
@@ -118,11 +114,9 @@ sbatch Scripts/run_hifiasm.sh /data/users/sschaerer/assembly_annotation_course/M
 
 ## Part 6 - Whole genome assembly using LJA 
 
-Assembling the Genome from PacBio HiFi reads using LJA v0.2. 
+Goal : to assemble the Genome from PacBio HiFi reads using LJA v0.2. 
 
-Purpose:
-- Perform a third independent genome assembly of MR-0 using a de Bruijn graph approach.
-C- ompare assembly contiguity and accuracy with Flye (OLC) and Hifiasm (string graph) assemblies.
+Purpose: Perform a third independent genome assembly of MR-0 using a de Bruijn graph approach.
 
 Tool:
 LJA v0.2 executed via Apptainer container /containers/apptainer/lja-0.2.sif.
@@ -148,7 +142,7 @@ sbatch Scripts/run_lja.sh /data/users/sschaerer/assembly_annotation_course/MR-0 
 
 ## Part 7 - Transcriptome assembly using Trinity
 
-Assembling the accession Sha transcriptome from paired-end Illumina RNA-seq reads using Trinity v2.15.1.
+Goal : to assemble the accession Sha transcriptome from paired-end Illumina RNA-seq reads using Trinity v2.15.1.
 
 Purpose:
 - Generate a de novo transcriptome assembly for A. thaliana Sha.
@@ -178,7 +172,7 @@ sbatch Scripts/07-run_trinity.sh
 
 ## Part 8 - Assembly completeness assessment with BUSCO
 
-To assess the completeness of genome and transcriptome assemblies by quantifying the presence of Benchmarking Universal Single-Copy Orthologs (BUSCOs).
+Goal : To assess the completeness of genome and transcriptome assemblies by quantifying the presence of Benchmarking Universal Single-Copy Orthologs (BUSCOs).
 
 Purpose:
 - Evaluate gene space completeness across all assemblies (Flye, Hifiasm, LJA, and Trinity).
@@ -254,18 +248,19 @@ Reference genome and annotation:
 Output:
 Located in /data/users/sschaerer/assembly_annotation_course/analysis/09_quast/
 and /data/users/sschaerer/assembly_annotation_course/analysis/10_quast_withref/
-report_no_ref.html — QUAST summary without reference
-report_with_ref.html — QUAST summary with reference alignment
-Tables of statistics (contig count, total length, N50, GC content, etc.)
-Alignment plots and misassembly summaries (only when reference is used)
+- report_no_ref.html — QUAST summary without reference
+- report_with_ref.html — QUAST summary with reference alignment
+- Tables of statistics (contig count, total length, N50, GC content, etc.)
+- Alignment plots and misassembly summaries (only when reference is used)
+
 Command:
-#### Without reference
+**Without reference**
 ```
 sbatch Scripts/09-run_quast_noref.sh
 
 ```
 
-##### With reference
+**With reference**
 ```
 sbatch Scripts/10-run_quast_withref.sh
 
@@ -273,15 +268,13 @@ sbatch Scripts/10-run_quast_withref.sh
 
 ## Part 11 - Assembly evaluation using Merqury
 
-Assess the consensus quality and completeness of genome assemblies by comparing k-mers from assembled genomes with those from raw high-accuracy reads using Merqury v1.3.
-
-This approach evaluates assembly accuracy without requiring a reference genome, making it ideal for long-read assemblies.
+Goal : To assesss the consensus quality and completeness of genome assemblies by comparing k-mers from assembled genomes with those from raw high-accuracy reads using Merqury v1.3.
 
 Purpose:
-Estimate the consensus quality value (QV) and base-level error rate of each assembly.
-Measure assembly completeness based on shared k-mers between reads and assemblies.
-Verify copy-number spectra and assess representation of heterozygous and repetitive regions.
-Compare overall quality between Flye, Hifiasm, and LJA assemblies.
+- Estimate the consensus quality value (QV) and base-level error rate of each assembly.
+- Measure assembly completeness based on shared k-mers between reads and assemblies.
+- Verify copy-number spectra and assess representation of heterozygous and repetitive regions.
+- Compare overall quality between Flye, Hifiasm, and LJA assemblies.
 
 Tool:
 Merqury v1.3 executed via Apptainer container /containers/apptainer/merqury_1.3.sif
@@ -307,19 +300,19 @@ Located in /data/users/sschaerer/assembly_annotation_course/merqury_results/
 - merqury_summary.tsv — combined summary table of QV and completeness.
 
 Command:
-Step 1: Build meryl database
+**Step 1: Build meryl database**
 ```
 sbatch Scripts/11_1_build_meryl_db.sh
 
 ```
 
-Step 2: Run Merqury evaluation
+**Step 2: Run Merqury evaluation**
 
 ```
 sbatch Scripts/11_2_run_merqury.sh
 ```
 
-Step 3: Create final summary table 
+**Step 3: Create final summary table** 
 
 ```
 echo -e "Assembly\tQV\tCompleteness(%)" > merqury_summary.tsv
@@ -350,11 +343,11 @@ run_nucmer_mummerplot.sh
 
 Input:
 Genome assemblies from Flye, Hifiasm, and LJA
-/data/users/sschaerer/assembly_annotation_course/flye_output/assembly.fasta
-/data/users/sschaerer/assembly_annotation_course/hifiasm_output/hifiasm_p_ctg.fasta
-/data/users/sschaerer/assembly_annotation_course/lja_output/assembly.fasta
+- /data/users/sschaerer/assembly_annotation_course/flye_output/assembly.fasta
+- /data/users/sschaerer/assembly_annotation_course/hifiasm_output/hifiasm_p_ctg.fasta
+- /data/users/sschaerer/assembly_annotation_course/lja_output/assembly.fasta
 Reference genome (TAIR10, Col-0):
-/data/users/sschaerer/assembly_annotation_course/references/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa
+- /data/users/sschaerer/assembly_annotation_course/references/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa
 
 Output:
 Located in /data/users/sschaerer/assembly_annotation_course/analysis/13_mummer/
