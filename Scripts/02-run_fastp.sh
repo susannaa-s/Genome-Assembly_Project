@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=run_fastp
 #SBATCH --partition=pibu_el8
-#SBATCH --output=fastp_%j.out
-#SBATCH --error=fastp_%j.err
+#SBATCH --output=./Out&Err/fastp_%j.out
+#SBATCH --error=./Out&Err/fastp_%j.err
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --time=01:00:00
