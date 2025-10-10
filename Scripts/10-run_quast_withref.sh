@@ -4,8 +4,8 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
 #SBATCH --time=1-00:00:00
-#SBATCH --output=quast_with_ref_%j.out
-#SBATCH --error=quast_with_ref_%j.err
+#SBATCH --output=Out&Err/quast_with_ref_%j.out
+#SBATCH --error=Out&Err/quast_with_ref_%j.err
 
 # path to container and assemblies
 QUAST_CONTAINER=/containers/apptainer/quast_5.2.0.sif
